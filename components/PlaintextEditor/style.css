@@ -1,5 +1,6 @@
 .editor {
   width: 640px;
+  height: 375px;
   background-color: var(--color-white);
   padding: 20px;
   display: flex;

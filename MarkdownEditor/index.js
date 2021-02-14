@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import ReactMarkdown from 'react-markdown';
 
 import css from './style.css';
 
 function MarkdownEditor({ file, write }) {
-  console.log(file, write);
+  // console.log(file, write);
+  const [content, setContent] = useState("some text");
+  useEffect(() => {
+    (async () => {
+      setContent(await file.text());
+    })();
+  }, [file]);
+  
   return (
     <div className={css.editor}>
-      <h3>TODO</h3>
-      <i>text/markdown</i>
+      <ReactMarkdown>
+        {content}
+      </ReactMarkdown>
     </div>
   );
 }

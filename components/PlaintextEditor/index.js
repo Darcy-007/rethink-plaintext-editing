@@ -1,14 +1,39 @@
-import React from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { createEditor } from 'slate';
+import { Slate, Editable, withReact } from 'slate-react';
 
 import css from './style.css';
 
 function PlaintextEditor({ file, write }) {
-  console.log(file, write);
+  // console.log(file, write);
+  const editor = useMemo(() => withReact(createEditor()), []);
+
+  const [text, setText] = useState([
+    {
+      type: 'paragraph',
+      children: [{ text: ''}],
+    },
+  ]);
+
+  useEffect(() => {
+    (async () => {
+      setText([{
+        type: 'paragraph',
+        children: [{ text: await file.text() }],
+      }]);
+    })();
+  }, []);
+
   return (
     <div className={css.editor}>
-      <h3>TODO</h3>
-      <i>text/plain</i>
+      <Slate
+        editor={editor}
+        value={text}
+        onChange={newText => setText(newText)}
+      >
+        <Editable />
+      </Slate>
     </div>
   );
 }

@@ -99,8 +99,8 @@ Previewer.propTypes = {
 
 // Uncomment keys to register editors for media types
 const REGISTERED_EDITORS = {
-  // "text/plain": PlaintextEditor,
-  // "text/markdown": MarkdownEditor,
+  "text/plain": PlaintextEditor,
+  "text/markdown": MarkdownEditor,
 };
 
 function PlaintextFilesChallenge() {
@@ -113,8 +113,8 @@ function PlaintextFilesChallenge() {
   }, []);
 
   const write = file => {
-    console.log('Writing soon... ', file.name);
-
+    // console.log('Writing soon... ', file.name);
+    
     // TODO: Write the file to the `files` array
   };
 
