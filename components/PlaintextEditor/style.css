@@ -1,10 +1,22 @@
 .editor {
   width: 640px;
-  height: 375px;
+  /* height: 375px; */
   background-color: var(--color-white);
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.save{
+  padding:5px;
+  background-color: #cccccc;
+  border-radius: 10%;
+  
+}
+
+.save:hover{
+  padding:5px;
+  background-color: #aaaaaa;
 }

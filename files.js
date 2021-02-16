@@ -18,6 +18,7 @@ Thanks for trying our challenge!
       lastModified: new Date('2020-01-05T16:39:00')
     }
   );
+  
 
   const plain = new File(
     ['Just some text looking for an editor'],

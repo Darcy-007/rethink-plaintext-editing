@@ -7,8 +7,9 @@ import classNames from 'classnames';
 import { listFiles } from '../files';
 
 // Used below, these need to be registered
-import MarkdownEditor from '../MarkdownEditor';
+import MarkdownEditor from '../components/MarkdownEditor';
 import PlaintextEditor from '../components/PlaintextEditor';
+// import JavaScriptEditor from '../components/JavaScriptEditor'
 
 import IconPlaintextSVG from '../public/icon-plaintext.svg';
 import IconMarkdownSVG from '../public/icon-markdown.svg';
@@ -99,24 +100,32 @@ Previewer.propTypes = {
 
 // Uncomment keys to register editors for media types
 const REGISTERED_EDITORS = {
-  "text/plain": PlaintextEditor,
-  "text/markdown": MarkdownEditor,
+  'text/plain': PlaintextEditor,
+  'text/markdown': MarkdownEditor
 };
 
 function PlaintextFilesChallenge() {
   const [files, setFiles] = useState([]);
   const [activeFile, setActiveFile] = useState(null);
 
+  const write = file => {
+    console.log('Writing soon... ', file.name);
+    files.forEach(f => {
+      if (f.name === file.name) {
+        console.info(file.text());
+        files[files.indexOf(f)] = file
+      }
+    });
+    console.info(files);
+    setFiles(files);
+  };
+
   useEffect(() => {
     const files = listFiles();
     setFiles(files);
   }, []);
 
-  const write = file => {
-    // console.log('Writing soon... ', file.name);
-    
-    // TODO: Write the file to the `files` array
-  };
+  
 
   const Editor = activeFile ? REGISTERED_EDITORS[activeFile.type] : null;
 
