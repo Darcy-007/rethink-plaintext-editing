@@ -17,6 +17,7 @@ import IconJavaScriptSVG from '../public/icon-javascript.svg';
 import IconJSONSVG from '../public/icon-json.svg';
 
 import css from './style.module.css';
+import JavaScriptEditor from '../components/JavaScriptEditor';
 
 const TYPE_TO_ICON = {
   'text/plain': IconPlaintextSVG,
@@ -101,7 +102,8 @@ Previewer.propTypes = {
 // Uncomment keys to register editors for media types
 const REGISTERED_EDITORS = {
   'text/plain': PlaintextEditor,
-  'text/markdown': MarkdownEditor
+  'text/markdown': MarkdownEditor,
+  'text/javascript': JavaScriptEditor
 };
 
 function PlaintextFilesChallenge() {
@@ -109,14 +111,11 @@ function PlaintextFilesChallenge() {
   const [activeFile, setActiveFile] = useState(null);
 
   const write = file => {
-    console.log('Writing soon... ', file.name);
     files.forEach(f => {
       if (f.name === file.name) {
-        console.info(file.text());
-        files[files.indexOf(f)] = file
+        files[files.indexOf(f)] = file;
       }
     });
-    console.info(files);
     setFiles(files);
   };
 
@@ -124,8 +123,6 @@ function PlaintextFilesChallenge() {
     const files = listFiles();
     setFiles(files);
   }, []);
-
-  
 
   const Editor = activeFile ? REGISTERED_EDITORS[activeFile.type] : null;
 
@@ -166,7 +163,12 @@ function PlaintextFilesChallenge() {
       <main className={css.editorWindow}>
         {activeFile && (
           <>
-            {Editor && <Editor file={activeFile} write={write} />}
+            {Editor && (
+              <div className={css.preview}>
+                <div className={css.title}>{path.basename(activeFile.name)}</div>
+                <Editor file={activeFile} write={write} />
+              </div>
+            )}
             {!Editor && <Previewer file={activeFile} />}
           </>
         )}
