@@ -1,10 +1,9 @@
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { createEditor } from 'slate';
 import { Slate, Editable, withReact} from 'slate-react';
 
 import css from './style.css';
-// import css from '../../pages/style.module.css'
 
 function PlaintextEditor({ file, write }) {
   const editor = useMemo(() => withReact(createEditor()), []);

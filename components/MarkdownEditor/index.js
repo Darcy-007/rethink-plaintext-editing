@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 
 import css from './style.css';
 
-function MarkdownEditor({ file, write }) {
+function MarkdownEditor({ file }) {
   // console.log(file, write);
   const [content, setContent] = useState("some text");
   useEffect(() => {
